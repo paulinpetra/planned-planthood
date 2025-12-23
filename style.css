@@ -9,13 +9,13 @@
   *::after {
     box-sizing: border-box;
   }
-
+  /*
   * {
     margin: 0;
     padding: 0;
     font: inherit;
   }
-
+*/
   body {
     min-height: 100vh;
   }
@@ -43,7 +43,11 @@
     text-wrap: pretty;
   }
 
-  /* for @container rules */
+  ul {
+    list-style: none;
+  }
+
+  /* for @container rules if used */
   body > :is(header, footer),
   main {
     container-type: inline-size;
@@ -156,6 +160,7 @@
    COMPOSITION (LAYOUT)
 ========================= */
 /* flow classes for equal space, every direct child element except the first one  */
+
 @layer composition {
   .flow > * + * {
     margin-block-start: var(--flow-space);
@@ -171,26 +176,63 @@
    COMPONENTS
 ========================= */
 @layer components {
-  /* Image gallery */
+  /*  IMAGE GALLERYCOMPONENT */
+
   .gallery-grid {
+    margin-block-start: var(--flow-space);
     display: grid;
     gap: var(--spacing-base);
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 40rem) {
-    .gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
   .gallery-grid img {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 0.25rem;
+    width: 100%;
+    height: 100%;
   }
 
-  /* Plant cards */
+  /* Tablet */
+
+  @media (width >= 40rem) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Desktop */
+  @media (width >= 64rem) {
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 15rem);
+      grid-template-areas:
+        "tall  top1  top2 top-right"
+        "tall  bottom bottom top-left";
+    }
+
+    .gallery-grid li:nth-child(1) {
+      grid-area: tall;
+    }
+    .gallery-grid li:nth-child(2) {
+      grid-area: top1;
+    }
+    .gallery-grid li:nth-child(3) {
+      grid-area: top2;
+    }
+    .gallery-grid li:nth-child(4) {
+      grid-area: bottom;
+    }
+    .gallery-grid li:nth-child(5) {
+      grid-area: top-right;
+    }
+    .gallery-grid li:nth-child(6) {
+      grid-area: top-left;
+    }
+  }
+
+  /* PLANT CARDS COMPONENT */
+
   .plant-grid {
     display: grid;
     gap: 2rem;
@@ -308,8 +350,8 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* space between icon and text */
-    color: var(--clr-accent); /* controls both text and SVG */
+    gap: 0.5rem;
+    color: var(--clr-accent);
   }
 
   .nav-logo-icon {
@@ -322,14 +364,83 @@
     font-size: var(--fs-600);
   }
 
-  .nav-list {
-    list-style: none;
-  }
-
   @media (min-width: 768px) {
     .nav-list {
       display: flex;
       gap: 2rem;
+    }
+  }
+  /* Intro/Hero section */
+  .intro {
+    padding: 2rem 1rem;
+    text-align: center;
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .intro h1 {
+    font-size: var(--fs-700);
+    margin-bottom: 1rem;
+    color: var(--clr-primary-dark);
+  }
+
+  .intro p {
+    font-size: var(--fs-400);
+    line-height: 1.6;
+    color: var(--clr-primary);
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 768px) {
+    .intro {
+      padding: 4rem 1rem;
+    }
+
+    .intro h1 {
+      font-size: calc(var(--fs-700) * 1.25);
+    }
+  }
+  /* Newsletter section */
+  .newsletter {
+    padding: 2rem 1rem;
+    text-align: center;
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  /* History Section */
+  .history {
+    background-color: var(--clr-neutral-200);
+    padding-block: var(--flow-space-lg);
+  }
+
+  /* Footer Section */
+  .site-footer {
+    background-color: var(--clr-accent);
+    color: var(--clr-neutral-100);
+    padding-block: var(--flow-space-lg);
+    margin-block-start: var(--flow-space-lg);
+  }
+
+  .site-footer a {
+    color: var(--clr-green-200);
+  }
+
+  .site-footer h2,
+  .site-footer h3 {
+    color: var(--clr-neutral-100);
+  }
+
+  .footer-layout {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 48rem) {
+    .footer-layout {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
     }
   }
 }

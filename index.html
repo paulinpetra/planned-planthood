@@ -47,9 +47,9 @@
     </header>
 
     <!-- MAIN CONTENT -->
-    <main>
+    <main class="flow">
       <!-- HERO / INTRO -->
-      <section class="intro">
+      <section class="intro flow">
         <h1>Våra uppskattade växter</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam,
@@ -57,7 +57,7 @@
         </p>
       </section>
       <!-- IMAGES -->
-      <section class="image-gallery">
+      <section class="container flow">
         <h2 class="visually-hidden">Inspirationsbilder</h2>
 
         <ul class="gallery-grid">
@@ -101,7 +101,7 @@
       </section>
 
       <!-- NEWSLETTER -->
-      <section class="newsletter">
+      <section class="newsletter flow">
         <h2>Nyhetsbrev</h2>
         <p>Anmäl dig till vårt nyhetsbrev så du inte missar en utsådd!</p>
 
@@ -114,7 +114,7 @@
 
       <!-- PLANT LIST -->
 
-      <section class="container">
+      <section class="container flow">
         <h2>Alla våra växter</h2>
 
         <ul class="plant-grid">
@@ -456,41 +456,47 @@
 
       <!-- HISTORY -->
       <section class="history">
-        <h2>Våra tidigare odlingar</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-          ratione quia eos pariatur deserunt veritatis.
-        </p>
+        <div class="container flow">
+          <h2>Våra tidigare odlingar</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+            ratione quia eos pariatur deserunt veritatis.
+          </p>
+        </div>
       </section>
     </main>
 
     <!-- FOOTER -->
 
     <footer class="site-footer">
-      <!-- ABOUT -->
-      <section class="about">
-        <h2>Om oss</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, veniam
-          ducimus aut sint atque ullam.
-        </p>
-
-        <address>
-          <p>Telefon: 020-1234567</p>
+      <div class="container footer-layout">
+        <!-- ABOUT -->
+        <section class="about flow">
+          <h2>Om oss</h2>
           <p>
-            E-post:
-            <a href="mailto:info@plannedplant.com">info@plannedplant.com</a>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+            veniam ducimus aut sint atque ullam.
           </p>
-        </address>
-      </section>
-      <!-- LINKS -->
 
-      <nav>
-        <a href="index.html">Hem</a>
-        <a href="history.html">Historik</a>
-        <a href="tips.html">Tips</a>
-        <a href="contact.html">Kontakt</a>
-      </nav>
+          <address>
+            <p>Telefon: 020-1234567</p>
+            <p>
+              E-post:
+              <a href="mailto:info@plannedplant.com">info@plannedplant.com</a>
+            </p>
+          </address>
+        </section>
+        <!-- LINKS -->
+
+        <nav class="footer-nav">
+          <ul class="flow" style="--flow-space: 0.5rem">
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="history.html">Historik</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
     </footer>
   </body>
 </html>
