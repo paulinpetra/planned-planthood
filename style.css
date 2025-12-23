@@ -43,15 +43,10 @@
     text-wrap: pretty;
   }
 
+  /* for @container rules */
   body > :is(header, footer),
   main {
     container-type: inline-size;
-  }
-
-  [role="list"] {
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 }
 
@@ -60,30 +55,32 @@
 ========================= */
 @layer theme {
   :root {
-    --clr-neutral-100: hsl(0, 0%, 100%);
-    --clr-neutral-200: hsl(0, 0%, 87%);
-    --clr-neutral-300: hsl(0, 0%, 57%);
-    --clr-neutral-400: hsl(0, 0%, 27%);
-    --clr-neutral-800: hsl(0, 0%, 17%);
-    --clr-neutral-900: hsl(0, 0%, 12%);
+    --clr-neutral-100: oklch(1 0 0);
+    --clr-neutral-200: oklch(0.9 0 0);
+    --clr-neutral-300: oklch(0.658 0 0);
+    --clr-neutral-400: oklch(0.39 0 0);
+    --clr-neutral-800: oklch(0.29 0 0);
+    --clr-neutral-900: oklch(0.238 0 0);
 
-    --clr-green-100: hsl(169, 11%, 93%);
-    --clr-green-200: hsl(169, 51%, 58%);
-    --clr-green-400: hsl(169, 86%, 28%);
-    --clr-green-800: hsl(169, 86%, 12%);
-    --clr-green-900: hsl(169, 80%, 12%);
+    --clr-green-100: oklch(0.949 0.004 184.2);
+    --clr-green-200: oklch(0.771 0.105 179.6);
+    --clr-green-400: oklch(0.551 0.102 174.9);
+    --clr-green-800: oklch(0.309 0.055 176.6);
+    --clr-green-900: oklch(0.303 0.052 177);
 
-    --clr-robust: hsl(221, 63%, 32%);
-    --clr-green: hsl(110, 63%, 32%);
-    --clr-flower: hsl(2, 92%, 33%);
-    --clr-colorful: hsl(303, 55%, 47%);
-    --clr-sunloving: hsl(27, 88%, 33%);
-    --clr-air: hsl(180, 84%, 27%);
-    --clr-decorative: hsl(278, 79%, 40%);
-    --clr-edible: hsl(68, 61%, 30%);
-    --clr-easy: hsl(224, 86%, 58%);
-    --clr-fragrant: hsl(327, 51%, 47%);
-    --clr-fast: hsl(218, 11%, 34%);
+    --clr-robust: oklch(0.385 0.124 263.1);
+    --clr-green: oklch(0.544 0.159 140.7);
+    --clr-flower: oklch(0.451 0.179 29.2);
+    --clr-colorful: oklch(0.575 0.216 330.1);
+    --clr-sunloving: oklch(0.512 0.128 51.5);
+    --clr-air: oklch(0.54 0.09 194.8);
+    --clr-decorative: oklch(0.464 0.224 307.6);
+    --clr-edible: oklch(0.555 0.115 117);
+    --clr-easy: oklch(0.567 0.21 265.1);
+    --clr-fragrant: oklch(0.547 0.171 350.3);
+    --clr-fast: oklch(0.445 0.022 261.4);
+
+    /* for font weight and size */
 
     --fw-400: 400;
     --fw-500: 500;
@@ -107,8 +104,8 @@
     --clr-primary: var(--clr-neutral-400);
     --clr-primary-dark: var(--clr-neutral-800);
 
-    --border-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
-      0 1px 2px rgba(0, 0, 0, 0.24);
+    --border-shadow: 0 1px 3px oklch(0 0 0 / 0.12),
+      0 1px 2px oklch(0 0 0 / 0.24);
 
     --spacing-base: 1rem;
 
@@ -158,39 +155,15 @@
 /* =========================
    COMPOSITION (LAYOUT)
 ========================= */
+/* flow classes for equal space, every direct child element except the first one  */
 @layer composition {
   .flow > * + * {
     margin-block-start: var(--flow-space);
   }
-
-  .flow-lg > * + * {
-    margin-block-start: var(--flow-space-lg);
-  }
-
-  .content-grid,
-  .fullwidth {
-    --_content-width: 70rem;
-    --_min-margin-width: 1rem;
-
-    display: grid;
-    grid-template-columns:
-      [fullwidth-start] minmax(var(--_min-margin-width), 1fr)
-      [content-start] min(
-        100% - var(--_min-margin-width) * 2,
-        var(--_content-width)
-      )
-      [content-end]
-      minmax(var(--_min-margin-width), 1fr)
-      [fullwidth-end];
-  }
-
-  .content-grid > *,
-  .fullwidth > * {
-    grid-column: content;
-  }
-
-  .content-grid > .fullwidth {
-    grid-column: fullwidth;
+  .container {
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
   }
 }
 
@@ -249,7 +222,7 @@
     padding: var(--spacing-base);
   }
 
-  /* Tags */
+  /* Card tags */
   .tags {
     display: flex;
     flex-wrap: wrap;
@@ -276,6 +249,34 @@
     background-color: var(--clr-green);
   }
 
+  .tag-sunloving {
+    background-color: var(--clr-sunloving);
+  }
+
+  .tag-easy {
+    background-color: var(--clr-easy);
+  }
+
+  .tag-fragrant {
+    background-color: var(--clr-fragrant);
+  }
+
+  .tag-flower {
+    background-color: var(--clr-flower);
+  }
+
+  .tag-robust {
+    background-color: var(--clr-robust);
+  }
+
+  .tag-air {
+    background-color: var(--clr-air);
+  }
+
+  .tag-decorative {
+    background-color: var(--clr-decorative);
+  }
+
   /* Meta */
   .plant-meta {
     display: flex;
@@ -288,6 +289,48 @@
   .avatar {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  /* Nav bar */
+  .site-header {
+    background-color: var(--clr-primary-light-1);
+  }
+
+  .nav {
+    max-width: 70rem;
+    margin-inline: auto;
+    padding: var(--spacing-base);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* space between icon and text */
+    color: var(--clr-accent); /* controls both text and SVG */
+  }
+
+  .nav-logo-icon {
+    width: 1.75rem;
+    height: auto;
+  }
+
+  .nav-logo-text {
+    font-weight: var(--fw-700);
+    font-size: var(--fs-600);
+  }
+
+  .nav-list {
+    list-style: none;
+  }
+
+  @media (min-width: 768px) {
+    .nav-list {
+      display: flex;
+      gap: 2rem;
+    }
   }
 }
 
