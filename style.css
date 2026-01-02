@@ -430,12 +430,12 @@
   }
   /*hamburger nav close button*/
 
-  /* for smoother animation */
+  /* for smoother animation (speed curve like in material design for Android) */
   .nav-toggle-label span {
     transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
       opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-
+  /* animations for turning hamburger to X */
   /* first bar should rotate 45 degrees and move down */
   .nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
@@ -446,7 +446,7 @@
     opacity: 0;
   }
 
-  /* bottom bar shouldrotate -45 degrees and move up */
+  /* bottom bar should rotate -45 degrees and move up */
   .nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
@@ -471,8 +471,9 @@
     }
   }
 
-  /* Intro/Hero section */
-  .intro {
+  /* Intro/Hero Section and History Section */
+  .intro,
+  .history {
     padding: 2rem 1rem;
     text-align: center;
     max-width: 48rem;
@@ -577,12 +578,6 @@
     }
   }
 
-  /* History Section */
-  .history {
-    background-color: var(--clr-neutral-200);
-    padding-block: var(--flow-space-lg);
-  }
-
   /* Footer Section */
   .site-footer {
     background-color: var(--clr-accent);
@@ -605,8 +600,8 @@
     gap: 3rem;
     grid-template-columns: 1fr;
   }
-
-  @media (width >= 64rem) {
+  /* Tablet and desktop footer */
+  @media (width >= 40rem) {
     .footer-layout {
       grid-template-columns: 2fr 1fr;
       align-items: start;
