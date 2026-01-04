@@ -13,7 +13,6 @@
   * {
     margin: 0;
     padding: 0;
-    font: inherit;
   }
 
   body {
@@ -46,12 +45,6 @@
   ul {
     list-style: none;
   }
-
-  /* for @container rules if used 
-  body > :is(header, footer),
-  main {
-    container-type: inline-size;
-  }*/
 }
 
 /* =========================
@@ -132,21 +125,26 @@
     color: var(--clr-primary-dark);
   }
 
-  h1,
-  h2,
-  h3 {
-    font-weight: var(--fw-700);
-    line-height: 1;
+  input,
+  button,
+  textarea,
+  select,
+  a {
+    font: inherit;
   }
 
   h1,
   h2 {
     font-size: var(--fs-700);
+
+    font-weight: var(--fw-700);
+    line-height: 1;
   }
 
   h3 {
     font-size: var(--fs-600);
     font-weight: var(--fw-600);
+    line-height: 1;
   }
 
   a {
@@ -163,7 +161,6 @@
 /* =========================
    COMPOSITION (LAYOUT)
 ========================= */
-/* flow classes for equal space, every direct child element except the first one  */
 
 @layer composition {
   .flow > * + * {
@@ -172,7 +169,7 @@
   .container {
     max-width: 70rem;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: var(--spacing-base);
   }
 }
 
@@ -281,7 +278,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-base);
   }
 
   .tag {
@@ -369,7 +366,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* so menu can wrap below the logo on mobile */
     font-weight: var(--fw-700);
     font-size: clamp(var(--fs-300), 1.5vw + 0.5rem, var(--fs-600));
     text-transform: uppercase;
@@ -387,12 +384,7 @@
     height: auto;
   }
 
-  .nav-list a:hover,
-  .nav-list a:focus-visible {
-    color: var(--clr-neutral-100);
-    background-color: var(--clr-accent);
-    text-decoration: none;
-  }
+  /* nav links - hidden on mobile */
 
   .nav-list {
     display: none;
@@ -403,17 +395,24 @@
   .nav-list a {
     display: flex;
     align-items: center;
-    padding-inline: 1rem;
     padding: var(--spacing-base);
+    /* for smoother animation (speed curve like in material design for Android) */
     transition: background-color 180ms cubic-bezier(0.4, 0, 0.2, 1),
       color 180ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* hamburger nav toggle button */
+  .nav-list a:hover,
+  .nav-list a:focus-visible {
+    color: var(--clr-neutral-100);
+    background-color: var(--clr-accent);
+    text-decoration: none;
+  }
+
+  /* hamburger menu toggle button (hidden checkbox triggered by label that containes the stripe-spans) */
 
   .nav-toggle {
     position: absolute;
-    opacity: 0;
+    opacity: 0; /* invisible but focusable */
     pointer-events: none;
   }
   .nav-toggle-label {
@@ -423,19 +422,17 @@
     padding: var(--spacing-base);
     cursor: pointer;
   }
+
+  /* hamburger nav stripes, unchecked state */
+
   .nav-toggle-label span {
     width: 1.5rem;
     height: 2px;
     background-color: var(--clr-accent);
-  }
-  /*hamburger nav close button*/
-
-  /* for smoother animation (speed curve like in material design for Android) */
-  .nav-toggle-label span {
     transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
       opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-  /* animations for turning hamburger to X */
+  /* animations for turning hamburger to X on checked state */
   /* first bar should rotate 45 degrees and move down */
   .nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
@@ -458,7 +455,7 @@
 
   @media (width >= 40rem) {
     .nav {
-      flex-wrap: nowrap;
+      flex-wrap: nowrap; /* so logo and menu stays on one row */
     }
     .nav-toggle-label {
       display: none;
@@ -482,7 +479,7 @@
 
   .intro h1 {
     font-size: var(--fs-700);
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-base);
     color: var(--clr-primary-dark);
     letter-spacing: 0.02em;
   }
@@ -567,7 +564,7 @@
 
   .newsletter-svg {
     width: 100%;
-    max-width: 15rem;
+    max-width: 10rem;
     height: auto;
     justify-self: center;
     border-radius: 50%;
@@ -581,8 +578,9 @@
   }
   @media (width >= 64rem) {
     .newsletter-grid {
-      grid-template-columns: 1fr minmax(auto, 40rem) auto 1fr;
+      grid-template-columns: 1fr minmax(auto, 30rem) auto 1fr;
       text-align: left;
+      column-gap: 4rem;
     }
     .newsletter-grid h2,
     .newsletter-grid form {
@@ -614,8 +612,7 @@
     color: var(--clr-green-200);
   }
 
-  .site-footer h2,
-  .site-footer h3 {
+  .site-footer h2 {
     color: var(--clr-neutral-100);
   }
 
